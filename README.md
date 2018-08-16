@@ -1,2 +1,2 @@
 # MIWeb.Docker.Neos
-Docker image for neos applications
+Docker image for Neos CMS sites and applications
