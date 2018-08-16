@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# cd "${0%/*}/.."
+mode=$FLOW_RUN_MODE
+setup=$(if [ "$mode" = "setup" ]; then echo 1; else echo 0; fi)
+install=$(if [ "$mode" = "install" ] || [ "$mode" = "setup" ]; then echo 1; else echo 0; fi)
+update=$(if [ "$mode" = "update" ]; then echo 1; else echo 0; fi)
+
+# composer install/update
+if [ $install -eq 1 ] || [ $update -eq 1 ];then
+    composerMode=$(if [ $update -eq 1 ]; then echo "update"; else echo "install"; fi)
+    echo "Performing composer $composerMode..."
+    composer $composerMode
+    if [ $? -eq 0 ];then
+       echo "Packages up to date. Setting file permissions for $FLOW_USER..."
+    else
+       echo "Package installation failed (exit code $?). Aborting..."
+       exit 1
+    fi
+fi
+
+# flow setup (file permissions)
+if [ $setup -eq 1 ];then
+    ./flow core:setfilepermissions $FLOW_USER www-data www-data 1>&2
+    if [ $? -eq 0 ];then
+       echo "File permissions applied. Starting apache..."
+    else
+       echo "Couldn't set file permissions (exit code $?). Aborting..."
+       exit 1
+    fi
+fi
+
+if [ -n "${SSL_DOMAIN}" ]; then certbot --email "${SSL_EMAIL}" --agree-tos --authenticator standalone --installer apache -d "${SSL_DOMAIN}"; fi
+
+# run apache
+apache2-foreground
+if [ $? -eq 0 ];then
+   echo "Application stopped."
+else
+   echo "Apache crashed (exit code $?)!"
+   exit 1
+fi
