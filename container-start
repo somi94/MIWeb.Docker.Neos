@@ -19,7 +19,7 @@ if [ $install -eq 1 ] || [ $update -eq 1 ];then
 fi
 
 # flow setup (file permissions)
-#if [ $setup -eq 1 ];then
+if [ $setup -eq 1 ];then
     echo "Setting file permissions for $FLOW_USER..."
     ./flow core:setfilepermissions $FLOW_USER www-data www-data 1>&2
     if [ $? -eq 0 ];then
@@ -28,7 +28,7 @@ fi
        echo "Couldn't set file permissions (exit code $?). Aborting..."
        exit 1
     fi
-#fi
+fi
 
 if [ -n "${SSL_DOMAIN}" ]; then certbot --email "${SSL_EMAIL}" --agree-tos --authenticator standalone --installer apache -d "${SSL_DOMAIN}"; fi
 
