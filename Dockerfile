@@ -19,7 +19,7 @@ RUN apt-get -y update
 #RUN if [ -n "${SSL_DOMAIN}" ]; then apt-get install -y certbot python-certbot-apache; fi
 RUN apt-get install -y git
 RUN apt-get install -y sudo
-RUN apt-get install -y zip unzip #zlib1g-dev zlib-dev
+RUN apt-get install -y zip zlib1g-dev unzip #zlib1g-dev zlib-dev
 
 # apache
 ADD vhost.conf /etc/apache2/sites-available/000-default.conf
