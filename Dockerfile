@@ -53,11 +53,13 @@ ENV FLOW_RUN_MODE "$FLOW_RUN_MODE"
 # ADD ../../app-data /var/www/data
 # WORKDIR /var/www/html
 # RUN chown /var/www/html/run
-ADD container-start /var/docker/container-start
 
 #neos
 RUN composer create-project $BASE_PACKAGE:$BASE_VERSION /var/www/html
 RUN ./flow core:setfilepermissions $FLOW_USER www-data www-data
+
+#start script
+ADD container-start /var/docker/container-start
 
 CMD ["/var/docker/container-start"]
 # CMD runuser -l ${FLOW_USER} -c "/var/www/html/run.sh ${FLOW_USER} ${FLOW_RUN_MODE}"
