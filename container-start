@@ -34,6 +34,7 @@ if [ -n "${SSL_DOMAIN}" ]; then certbot --email "${SSL_EMAIL}" --agree-tos --aut
 
 ./flow resource:publish
 chmod -R g+rwx Data
+chmod -R g+rwx Packages
 
 # run apache
 echo "Starting apache..."
