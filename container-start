@@ -32,6 +32,8 @@ fi
 
 if [ -n "${SSL_DOMAIN}" ]; then certbot --email "${SSL_EMAIL}" --agree-tos --authenticator standalone --installer apache -d "${SSL_DOMAIN}"; fi
 
+./flow resource:publish
+
 # run apache
 echo "Starting apache..."
 apache2-foreground
