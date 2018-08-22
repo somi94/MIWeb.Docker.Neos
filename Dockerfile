@@ -56,6 +56,8 @@ ENV FLOW_RUN_MODE "$FLOW_RUN_MODE"
 
 #neos
 RUN composer create-project $BASE_PACKAGE:$BASE_VERSION /var/www/html
+RUN mkdir -p Data/Temporary
+RUN mkdir -p Data/Persistent
 RUN ./flow core:setfilepermissions $FLOW_USER www-data www-data
 
 #start script
