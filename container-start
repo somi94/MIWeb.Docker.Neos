@@ -32,6 +32,7 @@ fi
 
 if [ -n "${SSL_DOMAIN}" ]; then certbot --email "${SSL_EMAIL}" --agree-tos --authenticator standalone --installer apache -d "${SSL_DOMAIN}"; fi
 
+echo "Setting file permissions..."
 chmod -R g+rwx Data
 chmod -R g+rwx Packages
 #composer install
@@ -40,6 +41,7 @@ chmod -R g+rwx Packages
 #    ./flow site:prune *
 #    ./flow site:import --package-key ${BASE_SITE}
 #fi
+echo "Cleaning up cache..."
 rm -rf Data/Temporary
 #./flow resource:publish
 
