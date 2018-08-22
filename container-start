@@ -34,12 +34,12 @@ if [ -n "${SSL_DOMAIN}" ]; then certbot --email "${SSL_EMAIL}" --agree-tos --aut
 
 chmod -R g+rwx Data
 chmod -R g+rwx Packages
-composer install
-./flow flow:package:rescan
-if [ -n "${BASE_SITE}" ];then
-    ./flow site:prune *
-    ./flow site:import --package-key ${BASE_SITE}
-fi
+#composer install
+#./flow flow:package:rescan
+#if [ -n "${BASE_SITE}" ];then
+#    ./flow site:prune *
+#    ./flow site:import --package-key ${BASE_SITE}
+#fi
 rm -rf Data/Temporary
 #./flow resource:publish
 
