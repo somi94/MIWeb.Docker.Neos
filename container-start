@@ -36,8 +36,12 @@ chmod -R g+rwx Data
 chmod -R g+rwx Packages
 composer install
 ./flow flow:package:rescan
+if [ -n "${BASE_SITE}" ];then
+    ./flow site:prune *
+    ./flow site:import --package-key ${BASE_SITE}
+fi
 rm -rf Data/Temporary
-./flow resource:publish
+#./flow resource:publish
 
 # run apache
 echo "Starting apache..."
