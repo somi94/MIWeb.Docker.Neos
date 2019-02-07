@@ -116,3 +116,4 @@ List of future features that have not been implemented yet.
 * Add documentation and autocomplete for neos utils
 * Add a temporary "Installing..." or "Maintenance..." page
 * Automatically re-link dev files if changed
+* Add default gitignore (to ignore context configuration)
