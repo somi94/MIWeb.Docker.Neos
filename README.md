@@ -88,8 +88,24 @@ You should see the the neos demo page (or whatever page you defined as your site
 Gratz, you've successfully installed neos!
 
 ### Starting development
-[ To be written ... ]
+After finishing setup, you can start development.
+Those are the most important file locations:
+#### app/
+Root of your development environment. Contains composer files and directories for project configuration and project specific packages.
+#### app/Configuration
+Your projects configuration. In a fresh installation, this directory contains a default Settings.yaml, modify it to your needs.
 
+All context specific settings are stored in a subdirectory, named after the active context.
+
+So in `Development` mode, your database credentials will be stored inside `app/Configuration/Development/Settings.yaml`.
+
+**It is highly recommended that you store all necessary credentials inside the projects context configuration file. If you use version control (like git), you should ensure that the context configuration file (and the docker-compose file) will not get versioned to avoid credentials inside your vcs repository.**
+
+**To do this via git, just add the following lines to your .gitignore file:**
+```
+/app/Configuration/*/*
+/docker-compose.yml
+```
 ## ToDos
 List of future features that have not been implemented yet.
 * Use nginx and more lightweight base image
@@ -99,3 +115,4 @@ List of future features that have not been implemented yet.
 * Utilities to build a production image (without development files)
 * Add documentation and autocomplete for neos utils
 * Add a temporary "Installing..." or "Maintenance..." page
+* Automatically re-link dev files if changed
