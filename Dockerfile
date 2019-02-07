@@ -8,6 +8,7 @@ ENV FLOW_USER "$FLOW_USER"
 
 # install dependencies
 RUN apt-get -y update
+RUN apt-get install -y gettext-base
 RUN apt-get install -y git
 RUN apt-get install -y sudo
 RUN apt-get install -y zip zlib1g-dev unzip #zlib1g-dev zlib-dev
