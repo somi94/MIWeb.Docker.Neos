@@ -8,10 +8,9 @@ FROM php:7.2-apache
 
 # install dependencies
 RUN apt-get -y update && \
-    apt-get install -y --no-install-recommends git zip && \
+    apt-get install -y --no-install-recommends git zip zlib1g-dev unzip && \
 	apt-get install -y gettext-base && \
 	apt-get install -y sudo
-#RUN apt-get install -y zip zlib1g-dev unzip #zlib1g-dev zlib-dev
 
 # apache
 ADD vhost.conf /etc/apache2/sites-available/000-default.conf
