@@ -123,10 +123,24 @@ chown -R $FLOW_USER:www-data $web_path
 chown -R $FLOW_USER:www-data $dev_path
 ls -al
 
+if [[ ! -f "$web_path/Configuration/$FLOW_CONTEXT/Settings.yaml" ]]; then
+    echo ""
+    echo "################################"
+    echo "# no context settings file found"
+    echo "# creating it..."
+    echo "################################"
+    echo ""
+fi
+envsubst < "$utils_path/Settings.yaml" > "$web_path/Configuration/$FLOW_CONTEXT/Settings.yaml"
+if [ $? -ne 0 ]; then
+	echo "couldn't write context settings file. aborting..."
+	exit 1
+fi
+
 if [[ ! -f "$web_path/Configuration/Settings.yaml" && -n "$NEOS_SITE_PACKAGE" ]]; then
     echo ""
     echo "################################"
-    echo "# no settings file found"
+    echo "# no project settings file found"
     echo "# running setup..."
     echo "################################"
     echo ""
@@ -135,9 +149,9 @@ if [[ ! -f "$web_path/Configuration/Settings.yaml" && -n "$NEOS_SITE_PACKAGE" ]]
         # TODO: create site package
     #fi
 
-    envsubst < "$utils_path/Settings.yaml" > "$web_path/Configuration/Settings.yaml"
+	cp "$web_path/Configuration/Settings.yaml.example" "$web_path/Configuration/Settings.yaml"
 	if [ $? -ne 0 ]; then
-		echo "couldn't write settings file. aborting..."
+		echo "couldn't write default settings file. aborting..."
 		exit 1
 	fi
     ./flow doctrine:migrate
@@ -150,7 +164,7 @@ fi
 echo ""
 echo "################################"
 echo "# app initialized"
-echo "# starting apache..."
+echo "# starting webserver..."
 echo "################################"
 echo ""
 apache2-foreground
