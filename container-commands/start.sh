@@ -136,6 +136,10 @@ if [[ ! -f "$web_path/Configuration/Settings.yaml" && -n "$NEOS_SITE_PACKAGE" ]]
     #fi
 
     envsubst < "$utils_path/Settings.yaml" > "$web_path/Configuration/Settings.yaml"
+	if [ $? -ne 0 ]; then
+		echo "couldn't write settings file. aborting..."
+		exit 1
+	fi
     ./flow doctrine:migrate
     ./flow site:import --package-key "$NEOS_SITE_PACKAGE"
     ./flow flow:cache:flush --force

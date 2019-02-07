@@ -43,6 +43,7 @@ VOLUME /var/www/html
 #RUN mkdir -p Data/Temporary
 #RUN mkdir -p Data/Persistent
 #RUN ./flow core:setfilepermissions $FLOW_USER www-data www-data
+ADD Settings.yaml /usr/share/neos-utils/Settings.yaml
 
 #start script
 ADD container-commands /usr/share/neos-utils
