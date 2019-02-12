@@ -3,4 +3,4 @@
 web_path=/var/www/html
 
 cd $web_path
-./flow "${@:2}"
+./flow "${@:3}"
