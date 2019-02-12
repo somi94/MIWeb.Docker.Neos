@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+setup=0
 web_path=/var/www/html
 dev_path=/usr/share/neos
 base_path=/usr/share/neos-base
@@ -44,7 +45,7 @@ if [[ "${FLOW_USER}" != "root" && $(grep -c "^${FLOW_USER}:" /etc/passwd) -eq 0 
 fi
 
 # install base package if missing
-if [[ ! -f "$web_path/composer.json" && ! -f "$dev_path/composer.json" ]]; then
+if [[ ! -f "$base_path/composer.json" ]]; then
     echo ""
     echo "################################"
     echo "# No composer file detected"
@@ -77,6 +78,8 @@ if [[ ! -f "$web_path/composer.json" && ! -f "$dev_path/composer.json" ]]; then
     mkdir -p $web_path/Data/Temporary
     mkdir -p $web_path/Data/Persistent
     #./flow core:setfilepermissions $FLOW_USER www-data www-data
+	
+	setup=1
 fi
 
 # link dev files
@@ -130,11 +133,11 @@ if [[ ! -f "$web_path/Configuration/$FLOW_CONTEXT/Settings.yaml" ]]; then
     echo "# creating it..."
     echo "################################"
     echo ""
-fi
-envsubst < "$utils_path/Settings.yaml" > "$web_path/Configuration/$FLOW_CONTEXT/Settings.yaml"
-if [ $? -ne 0 ]; then
-	echo "couldn't write context settings file. aborting..."
-	exit 1
+	envsubst < "$utils_path/Settings.yaml" > "$web_path/Configuration/$FLOW_CONTEXT/Settings.yaml"
+	if [ $? -ne 0 ]; then
+		echo "couldn't write context settings file. aborting..."
+		exit 1
+	fi
 fi
 
 if [[ ! -f "$web_path/Configuration/Settings.yaml" && -n "$NEOS_SITE_PACKAGE" ]]; then
@@ -154,7 +157,12 @@ if [[ ! -f "$web_path/Configuration/Settings.yaml" && -n "$NEOS_SITE_PACKAGE" ]]
 		echo "couldn't write default settings file. aborting..."
 		exit 1
 	fi
-    ./flow doctrine:migrate
+
+	setup=1
+fi
+
+if [[ "$setup" ]]; then
+	./flow doctrine:migrate
 
     # ./flow site:import --package-key "$NEOS_SITE_PACKAGE"
 	neos-utils setup-site
