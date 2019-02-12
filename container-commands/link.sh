@@ -46,6 +46,9 @@ if [[ -d "$dev_path" ]]; then
         for package_type_dir in $dev_path/Packages/*; do
             package_type=$(basename "$package_type_dir")
             echo "Linking dev packages of type '$package_type'..."
+            if [[ ! -d "$web_path/Packages/$package_type" ]]; then
+                mkdir -p "$web_path/Packages/$package_type"
+            fi
             for package_dir in $package_type_dir/*; do
                 package=$(basename "$package_dir")
                 package_path="Packages/$package_type/$package"
