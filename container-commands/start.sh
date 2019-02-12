@@ -155,7 +155,10 @@ if [[ ! -f "$web_path/Configuration/Settings.yaml" && -n "$NEOS_SITE_PACKAGE" ]]
 		exit 1
 	fi
     ./flow doctrine:migrate
-    ./flow site:import --package-key "$NEOS_SITE_PACKAGE"
+
+    # ./flow site:import --package-key "$NEOS_SITE_PACKAGE"
+	neos-utils setup-site
+
     ./flow flow:cache:flush --force
     ./flow user:create "$FLOW_USER" "$FLOW_PASSWORD" "$FLOW_FIRSTNAME" "$FLOW_LASTNAME"
 fi
