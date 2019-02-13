@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 command_dir="/usr/share/neos-utils"
-if[[ -n "$BUILD_PATH_UTILS" ]]; then
+if [[ -n "$BUILD_PATH_UTILS" ]]; then
     command_dir=$BUILD_PATH_UTILS
 fi
 
