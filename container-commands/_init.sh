@@ -18,8 +18,8 @@ if [[ -z "$BUILD_REPOSITORY" ]]; then
 fi
 
 # flow variables
-if [[ -z "$NEOS_CONTEXT" ]]; then
-    export $NEOS_CONTEXT=Development
+if [[ -z "$FLOW_CONTEXT" ]]; then
+    export $FLOW_CONTEXT=Development
 fi
 if [[ -z "$NEOS_USER_NAME" ]]; then
     export $NEOS_USER_NAME=root
