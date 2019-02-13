@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 
-web_path=/var/www/html
-
-cd $web_path
+cd $BUILD_PATH_RELEASE
 ./flow "${@:3}"
