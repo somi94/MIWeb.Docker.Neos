@@ -45,7 +45,14 @@ ADD container-commands /usr/share/neos-utils
 ADD container.sh /usr/local/bin/neos-utils
 RUN chmod a+x /usr/local/bin/neos-utils /usr/share/neos-utils/*
 
-RUN neos-utils print-env
-RUN neos-utils build
+ADD app /usr/share/neos-project
+
+#ARG BUILD_REPOSITORY="https://github.com/neos/neos-base-distribution.git"
+#ARG BUILD_VERSION=""
+#ARG BUILD_PATH_BASE="/usr/share/neos-base"
+#ARG BUILD_PATH_RELEASE="/var/www/html"
+#ARG BUILD_USER="root"
+
+#RUN neos-utils build-base
 
 CMD ["neos-utils","start"]

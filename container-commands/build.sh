@@ -9,55 +9,30 @@ if [[ -n "$SYSTEM_USER_NAME" ]]; then
 	user=$SYSTEM_USER_NAME
 fi
 if [[ "$user" != "root" && $(grep -c "^$user:" /etc/passwd) -eq 0 ]]; then
+	echo ""
     echo "#####################################"
     echo "# Adding system user '$user'"
     echo "#####################################"
+	echo ""
 
     adduser -q "$user"
     usermod -a -G www-data "$user"
 fi
 
 # checkout base package
-#if [[ ! -f "$BUILD_PATH_BASE/composer.json" ]]; then
-    echo ""
-    echo "################################"
-    echo "# Setting up base distribution"
-    echo "# repository: $BUILD_REPOSITORY"
-    if [[ -n "$BUILD_VERSION" ]]; then
-        echo "# version: $BUILD_VERSION"
-    fi
-    echo "################################"
-    echo ""
-    mkdir -p $BUILD_PATH_BASE
-    git clone "$BUILD_REPOSITORY" $BUILD_PATH_BASE
-    if [ $? -ne 0 ]; then
-        echo "git clone failed. aborting..."
-        exit 1
-    fi
-    if [[ -n "$BUILD_VERSION" ]]; then
-        echo "checking out version '$BUILD_VERSION'..."
-        cd $BUILD_PATH_BASE
-        git checkout $BUILD_VERSION
-        if [ $? -ne 0 ]; then
-            echo "version checkout failed. aborting..."
-            exit 1
-        fi
-    fi
-    
-    mkdir -p $BUILD_PATH_BASE/Data/Temporary
-    mkdir -p $BUILD_PATH_BASE/Data/Persistent
-
-    cp -r $BUILD_PATH_BASE/* $BUILD_PATH_RELEASE
-#fi
+if [[ ! -f "$BUILD_PATH_BASE/composer.json" ]]; then
+    neos-utils build-base
+fi
 
 # link dev files
 echo ""
 echo "################################"
 echo "# Linking dev files..."
 echo "################################"
+echo ""
 neos-utils link
 if [ $? -ne 0 ]; then
-    echo "neos-utils link failed. aborting..."
+    echo "Linking files failed. aborting..."
     exit 1
 fi
 
@@ -89,7 +64,9 @@ else
     composer install
 fi
 if [ $? -ne 0 ]; then
+	echo ""
     echo "composer install failed. aborting..."
+	echo ""
     exit 1
 fi
 
@@ -97,6 +74,7 @@ echo ""
 echo "################################"
 echo "# Flushing cache..."
 echo "################################"
+echo ""
 rm -rf Data/Temporary
 chown -R $FLOW_USER:www-data $BUILD_PATH_RELEASE
 chown -R $FLOW_USER:www-data $BUILD_PATH_DIST
