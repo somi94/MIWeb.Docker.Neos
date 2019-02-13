@@ -2,8 +2,8 @@
 if [[ -z "$BUILD_PATH_RELEASE" ]]; then
   export $BUILD_PATH_RELEASE=/var/www/html
 fi
-if [[ -z "$BUILD_PATH_DEV" ]]; then
-  export $BUILD_PATH_DEV=/usr/share/neos
+if [[ -z "$BUILD_PATH_DIST" ]]; then
+  export $BUILD_PATH_DIST=/usr/share/neos
 fi
 if [[ -z "$BUILD_PATH_BASE" ]]; then
   export $BUILD_PATH_BASE=/usr/share/neos-base
