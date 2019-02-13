@@ -32,11 +32,6 @@ RUN curl -s https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN chmod a+x /usr/local/bin/composer
 
-# flow
-ARG FLOW_RUN_MODE
-ENV FLOW_RUN_MODE "$FLOW_RUN_MODE"
-
-VOLUME /var/www/html
 
 #neos
 #RUN composer create-project $BASE_PACKAGE:$BASE_VERSION /var/www/html
@@ -49,5 +44,8 @@ ADD Settings.yaml /usr/share/neos-utils/Settings.yaml
 ADD container-commands /usr/share/neos-utils
 ADD container.sh /usr/local/bin/neos-utils
 RUN chmod a+x /usr/local/bin/neos-utils /usr/share/neos-utils/*
+
+RUN neos-utils print-env
+RUN neos-utils build
 
 CMD ["neos-utils","start"]
