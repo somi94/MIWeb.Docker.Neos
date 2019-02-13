@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-. ./config.sh
-
 # setup webserver user (username equals flow username)
 if [[ "$FLOW_USER" != "root" && $(grep -c "^$FLOW_USER:" /etc/passwd) -eq 0 ]]; then
     echo "#####################################"
