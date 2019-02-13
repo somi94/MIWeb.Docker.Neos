@@ -8,4 +8,5 @@ if [[ ! -f "$command_dir/$command.sh" ]]; then
     exit 1
 fi
 
+. $command_dir/config.sh
 . $command_dir/$command.sh "${@:2}"
