@@ -21,15 +21,15 @@ fi
 if [[ -z "$FLOW_CONTEXT" ]]; then
     export $FLOW_CONTEXT=Development
 fi
-if [[ -z "$FLOW_USER" ]]; then
-    export $FLOW_USER=root
+if [[ -z "$NEOS_USER_NAME" ]]; then
+    export $NEOS_USER_NAME=root
 fi
-if [[ -z "$FLOW_PASSWORD" ]]; then
-    export $FLOW_PASSWORD=root
+if [[ -z "$NEOS_USER_PASSWORD" ]]; then
+    export $NEOS_USER_PASSWORD=root
 fi
-if [[ -z "$FLOW_FIRSTNAME" ]]; then
-    export $FLOW_FIRSTNAME="Firstname"
+if [[ -z "$NEOS_USER_FIRSTNAME" ]]; then
+    export $NEOS_USER_FIRSTNAME="Firstname"
 fi
-if [[ -z "$FLOW_FIRSTNAME" ]]; then
-    export $FLOW_FIRSTNAME="Lastname"
+if [[ -z "$NEOS_USER_LASTNAME" ]]; then
+    export $NEOS_USER_LASTNAME="Lastname"
 fi
