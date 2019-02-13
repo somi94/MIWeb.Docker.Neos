@@ -25,11 +25,10 @@ echo ""
 
 echo ""
 echo "################################"
-echo "# Updating setup user..."
+echo "# Updating user..."
 echo "################################"
 echo ""
-# TODO: don't do this on every start (alter user info if already existing)
-#./flow user:create "$FLOW_USER" "$FLOW_PASSWORD" "$FLOW_FIRSTNAME" "$FLOW_LASTNAME"
+neos-utils setup-user
 
 # run apache
 echo ""
