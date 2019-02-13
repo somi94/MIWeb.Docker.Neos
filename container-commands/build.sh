@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 . ./config.sh
 
 # setup webserver user (username equals flow username)
