@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+neos-utils build
+
 cd $BUILD_PATH_RELEASE
 
 echo ""
