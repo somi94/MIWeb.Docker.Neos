@@ -5,9 +5,11 @@ if [[ -z "$NEOS_SITE_PACKAGE" ]]; then
 	exit 1
 fi
 
-web_path=/var/www/html
-dev_path=/usr/share/neos
+web_path=$BUILD_PATH_RELEASE
+dev_path=$BUILD_PATH_DIST
 site="$NEOS_SITE_PACKAGE"
+
+cd $web_path
 
 if [[ -z "$NEOS_SITE_NAME" ]]; then
 	site_name="New Neos Site"
@@ -20,15 +22,15 @@ if [[ $(neos-utils flow site:list) == *" $site "* ]]; then
 else
 	echo "Site '$site' not found. Creating it using name '$site_name'..."
 
-	neos-utils flow kickstart:site --site-name "$site_name" --package-key "$site"
+	./flow kickstart:site --site-name "$site_name" --package-key "$site"
 
 	mv $web_path/DistributionPackages/$site $dev_path/Packages/Sites/$site
 fi
 
 echo "Importing site '$site'..."
 
-neos-utils flow site:prune '*'
+./flow site:prune '*'
 
-neos-utils flow site:import --package-key "$site"
+./flow site:import --package-key "$site"
 
 echo "Site import finished."
