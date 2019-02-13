@@ -28,6 +28,7 @@ else
 
 	./flow kickstart:site --site-name "$site_name" --package-key "$site"
 
+	mkdir -p $dev_path/Packages/Sites
 	mv $web_path/DistributionPackages/$site $dev_path/Packages/Sites/$site
 	
 	import=1
