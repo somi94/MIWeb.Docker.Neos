@@ -19,7 +19,7 @@ else
 fi
 
 import=0
-if [[ $(neos-utils flow site:list) == *" $site "* ]]; then
+if [[ $(./flow site:list) == *" $site "* ]]; then
 	echo "Site '$site' exists."
 	
 	import=$force_reimport
