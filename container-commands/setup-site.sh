@@ -8,6 +8,7 @@ fi
 web_path=$BUILD_PATH_RELEASE
 dev_path=$BUILD_PATH_DIST
 site="$NEOS_SITE_PACKAGE"
+force_reimport="$1"
 
 cd $web_path
 
@@ -17,20 +18,29 @@ else
 	site_name="$NEOS_SITE_NAME"
 fi
 
+import=0
 if [[ $(neos-utils flow site:list) == *" $site "* ]]; then
 	echo "Site '$site' exists."
+	
+	import=$force_reimport
 else
 	echo "Site '$site' not found. Creating it using name '$site_name'..."
 
 	./flow kickstart:site --site-name "$site_name" --package-key "$site"
 
 	mv $web_path/DistributionPackages/$site $dev_path/Packages/Sites/$site
+	
+	import=1
 fi
 
-echo "Importing site '$site'..."
+if [[ "$import" = "1" ]]; then
+	echo "Importing site '$site'..."
 
-./flow site:prune '*'
+	./flow site:prune '*'
 
-./flow site:import --package-key "$site"
+	./flow site:import --package-key "$site"
 
-echo "Site import finished."
+	echo "Site import finished."
+else
+	echo "Site existed and no reimport was forced, skipped site import.
+fi
