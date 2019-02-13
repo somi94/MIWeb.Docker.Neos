@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 
 # setup webserver user (username equals flow username)
-if [[ "$FLOW_USER" != "root" && $(grep -c "^$FLOW_USER:" /etc/passwd) -eq 0 ]]; then
+user="root"
+if [[ -n "$NEOS_USER_NAME" ]]; then
+	user=$NEOS_USER_NAME
+fi
+if [[ -n "$SYSTEM_USER_NAME" ]]; then
+	user=$SYSTEM_USER_NAME
+fi
+if [[ "$user" != "root" && $(grep -c "^$user:" /etc/passwd) -eq 0 ]]; then
     echo "#####################################"
-    echo "# Adding system user '$FLOW_USER'"
+    echo "# Adding system user '$user'"
     echo "#####################################"
 
-    adduser -q "$FLOW_USER"
-    usermod -a -G www-data "$FLOW_USER"
+    adduser -q "$user"
+    usermod -a -G www-data "$user"
 fi
 
 # checkout base package
@@ -99,13 +106,13 @@ echo "################################"
 echo "# Creating context settings..."
 echo "################################"
 echo ""
-envsubst < "$BUILD_PATH_UTILS/Settings.yaml" > "$BUILD_PATH_RELEASE/Configuration/$FLOW_CONTEXT/Settings.Build.yaml"
+envsubst < "$BUILD_PATH_UTILS/Settings.yaml" > "$BUILD_PATH_RELEASE/Configuration/$NEOS_CONTEXT/Settings.Build.yaml"
 if [ $? -ne 0 ]; then
     echo "couldn't write context settings file. aborting..."
     exit 1
 fi
 
-if [[ ! -f "$web_path/Configuration/Settings.yaml" ]]; then
+if [[ ! -f "$BUILD_PATH_RELEASE/Configuration/Settings.yaml" ]]; then
     echo ""
     echo "################################"
     echo "# No project settings file found."
