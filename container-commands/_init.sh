@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # build variables
 if [[ -z "$BUILD_PATH_RELEASE" ]]; then
   export $BUILD_PATH_RELEASE=/var/www/html
