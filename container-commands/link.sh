@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-web_path=/var/www/html
-dev_path=/usr/share/neos
+web_path=$BUILD_PATH_RELEASE
+dev_path=$BUILD_PATH_DIST
 
 link_file () {
     file=$1
