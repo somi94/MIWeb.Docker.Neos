@@ -106,7 +106,7 @@ echo "################################"
 echo "# Creating context settings..."
 echo "################################"
 echo ""
-envsubst < "$BUILD_PATH_UTILS/Settings.yaml" > "$BUILD_PATH_RELEASE/Configuration/$NEOS_CONTEXT/Settings.Build.yaml"
+envsubst < "$BUILD_PATH_UTILS/Settings.yaml" > "$BUILD_PATH_RELEASE/Configuration/$FLOW_CONTEXT/Settings.Build.yaml"
 if [ $? -ne 0 ]; then
     echo "couldn't write context settings file. aborting..."
     exit 1
