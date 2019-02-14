@@ -22,6 +22,10 @@ fi
 # checkout base package
 if [[ ! -f "$BUILD_PATH_BASE/composer.json" ]]; then
     neos-utils build-base
+	if [ $? -ne 0 ]; then
+		echo "Base build failed. aborting..."
+		exit 1
+	fi
 fi
 
 # link dev files
@@ -49,12 +53,20 @@ if [[ ! -f composer.lock && ! -s composer.lock ]]; then
     echo "################################"
     echo ""
     composer update
+	if [ $? -ne 0 ]; then
+		echo "Composer update failed. aborting..."
+		exit 1
+	fi
     echo ""
     echo "################################"
     echo "# Applying file permissions..."
     echo "################################"
     echo ""
     ./flow core:setfilepermissions $FLOW_USER www-data www-data
+	if [ $? -ne 0 ]; then
+		echo "Updating file permissions failed. aborting..."
+		exit 1
+	fi
 else
     echo ""
     echo "################################"
@@ -62,12 +74,10 @@ else
     echo "################################"
     echo ""
     composer install
-fi
-if [ $? -ne 0 ]; then
-	echo ""
-    echo "composer install failed. aborting..."
-	echo ""
-    exit 1
+	if [ $? -ne 0 ]; then
+		echo "Composer install failed. aborting..."
+		exit 1
+	fi
 fi
 
 echo ""
