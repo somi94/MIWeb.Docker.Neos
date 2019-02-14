@@ -30,6 +30,8 @@ else
 
 	mkdir -p $dev_path/Packages/Sites
 	mv $web_path/DistributionPackages/$site $dev_path/Packages/Sites/$site
+	neos-utils link
+	composer update
 	
 	import=1
 fi

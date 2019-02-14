@@ -11,12 +11,16 @@ echo "################################"
 echo ""
 ./flow doctrine:migrate
 
-echo ""
-echo "################################"
-echo "# Updating site..."
-echo "################################"
-echo ""
-neos-utils setup-site
+if [[ -n "$NEOS_SITE_PACKAGE" ]]; then
+	echo ""
+	echo "################################"
+	echo "# Updating site..."
+	echo "################################"
+	echo ""
+	neos-utils setup-site
+else
+	echo "No site package defined, skipping site setup..."
+fi
 
 echo ""
 echo "################################"
@@ -25,12 +29,16 @@ echo "################################"
 echo ""
 ./flow flow:cache:flush --force
 
-echo ""
-echo "################################"
-echo "# Updating user..."
-echo "################################"
-echo ""
-neos-utils setup-user
+if [[ -n "$NEOS_USER_NAME" ]]; then
+	echo ""
+	echo "################################"
+	echo "# Updating user..."
+	echo "################################"
+	echo ""
+	neos-utils setup-user
+else
+	echo "No user defined, skipping user setup..."
+fi
 
 # run apache
 echo ""
