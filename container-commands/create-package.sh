@@ -30,3 +30,9 @@ if [ $? -ne 0 ]; then
 	echo "Link failed. Aborting..."
 	exit 1
 fi
+
+composer update
+if [ $? -ne 0 ]; then
+	echo "Composer update failed. Aborting..."
+	exit 1
+fi
