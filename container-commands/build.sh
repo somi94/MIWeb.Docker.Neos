@@ -2,21 +2,15 @@
 
 # setup webserver user (username equals flow username)
 user="root"
-if [[ -n "$NEOS_USER_NAME" ]]; then
-	user=$NEOS_USER_NAME
-fi
-if [[ -n "$SYSTEM_USER_NAME" ]]; then
-	user=$SYSTEM_USER_NAME
-fi
-if [[ "$user" != "root" && $(grep -c "^$user:" /etc/passwd) -eq 0 ]]; then
+if [[ "$SYSTEM_USER_NAME" != "root" && $(grep -c "^$SYSTEM_USER_NAME:" /etc/passwd) -eq 0 ]]; then
 	echo ""
     echo "#####################################"
-    echo "# Adding system user '$user'"
+    echo "# Adding system user '$SYSTEM_USER_NAME'"
     echo "#####################################"
 	echo ""
 
-    adduser -q "$user"
-    usermod -a -G www-data "$user"
+    adduser -q "$SYSTEM_USER_NAME"
+    usermod -a -G www-data "$SYSTEM_USER_NAME"
 fi
 
 # checkout base package
@@ -62,7 +56,7 @@ if [[ ! -f composer.lock && ! -s composer.lock ]]; then
     echo "# Applying file permissions..."
     echo "################################"
     echo ""
-    ./flow core:setfilepermissions $FLOW_USER www-data www-data
+    ./flow core:setfilepermissions $SYSTEM_USER_NAME www-data www-data
 	if [ $? -ne 0 ]; then
 		echo "Updating file permissions failed. aborting..."
 		exit 1
@@ -86,8 +80,8 @@ echo "# Flushing cache..."
 echo "################################"
 echo ""
 rm -rf Data/Temporary
-chown -R $FLOW_USER:www-data $BUILD_PATH_RELEASE
-chown -R $FLOW_USER:www-data $BUILD_PATH_DIST
+chown -R $SYSTEM_USER_NAME:www-data $BUILD_PATH_RELEASE
+chown -R $SYSTEM_USER_NAME:www-data $BUILD_PATH_DIST
 
 echo ""
 echo "################################"
