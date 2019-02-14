@@ -49,10 +49,10 @@ echo "# Applying base file permissions"
 echo "################################"
 echo ""
 ./flow core:setfilepermissions $BUILD_USER www-data www-data
-if [ $? -ne 0 ]; then
-    echo "Setting base file permissions failed. Aborting..."
-    exit 1
-fi
+#if [ $? -ne 0 ]; then
+#    echo "Setting base file permissions failed. Aborting..."
+#    exit 1
+#fi
 
 echo ""
 echo "################################"
