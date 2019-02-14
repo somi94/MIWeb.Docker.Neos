@@ -39,6 +39,7 @@ link_directory () {
 }
 
 mkdir -p $dev_path
+find $web_path -type l -delete
 
 if [[ -d "$dev_path" ]]; then
     echo "Linking dev files from $dev_path..."
