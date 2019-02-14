@@ -59,6 +59,7 @@ echo "################################"
 echo "# Releasing base files"
 echo "################################"
 echo ""
+rm -rf $BUILD_PATH_RELEASE/*
 cp -r $BUILD_PATH_BASE/* $BUILD_PATH_RELEASE
 if [ $? -ne 0 ]; then
     echo "Base file release failed. Aborting..."
