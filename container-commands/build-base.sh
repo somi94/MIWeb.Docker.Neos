@@ -14,7 +14,7 @@ mkdir -p $BUILD_PATH_BASE
 
 git clone "$BUILD_REPOSITORY" $BUILD_PATH_BASE
 if [ $? -ne 0 ]; then
-    echo "git clone failed. aborting..."
+    echo "Git clone failed. Aborting..."
     exit 1
 fi
 
@@ -24,7 +24,7 @@ if [[ -n "$BUILD_VERSION" ]]; then
     echo "checking out version '$BUILD_VERSION'..."
     git checkout $BUILD_VERSION
     if [ $? -ne 0 ]; then
-        echo "version checkout failed. aborting..."
+        echo "Version checkout failed. Aborting..."
         exit 1
     fi
 fi
@@ -34,20 +34,32 @@ mkdir -p Data/Persistent
 
 echo ""
 echo "################################"
-echo "# performing composer update"
+echo "# Performing base composer update"
 echo "################################"
 echo ""
 composer update
+if [ $? -ne 0 ]; then
+    echo "Composer update failed. Aborting..."
+    exit 1
+fi
 echo ""
 echo "################################"
-echo "# applying file permissions"
+echo "# Applying base file permissions"
 echo "################################"
 echo ""
 ./flow core:setfilepermissions $BUILD_USER www-data www-data
+if [ $? -ne 0 ]; then
+    echo "Setting base file permissions failed. Aborting..."
+    exit 1
+fi
 
 echo ""
 echo "################################"
-echo "# applying file permissions"
+echo "# Releasing base files"
 echo "################################"
 echo ""
 cp -r $BUILD_PATH_BASE/* $BUILD_PATH_RELEASE
+if [ $? -ne 0 ]; then
+    echo "Base file release failed. Aborting..."
+    exit 1
+fi
