@@ -41,9 +41,13 @@ services:
       NEOS_USER_FIRSTNAME: 'John'                   # your firstname
       NEOS_USER_LASTNAME: 'Doe'                     # your lastname
       NEOS_SITE_PACKAGE: 'Neos.Demo'                # the site package to use (will be imported automatically)
+#     use this to start with a empty site:
 #     NEOS_SITE_PACKAGE: 'My.New.Site'              # the site package to use (will be created andimported automatically)
 #     NEOS_SITE_NAME: 'New Neos Site!'
-      BUILD_VERSION: '4.0'                          # the neos base version to use
+      BUILD_VERSION: '4.2'                          # the neos base version to use
+#     use this to create a flow container without neos
+#     BUILD_REPOSITORY: 'https://github.com/neos/flow-base-distribution'
+#     BUILD_VERSION: '5.2'
       MYSQL_USER: root                              # mysql username (has to match user defined for db container)
       MYSQL_PASSWORD: root                          # mysql password (has to match password defined for db container)
       MYSQL_DATABASE: database                      # mysql database (has to match database defined for db container)
