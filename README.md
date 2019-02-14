@@ -29,20 +29,21 @@ services:
     volumes:
       # The app directory is where your neos development files will live. 
       # This includes project configuration, composer files and project specific packages (site package, site specific nodetypes...).
-      - ./app:/usr/share/neos
+      - ./app:/usr/share/neos-project
       # The app-data directory will link to the neos installation.
       # This isn't necessary and can be omitted (especially in production environments) but is useful to keep an eye on neos core files and thirdparty packages.
       # On top of that it will allow your IDE to locate the neos classes.
       - ./app-data/Neos:/var/www/html 
     environment:
       FLOW_CONTEXT: 'Development'                   # the application context
-      FLOW_USER: 'john'                             # neos username    
-      FLOW_PASSWORD: 'john'                         # neos password
-      FLOW_FIRSTNAME: 'John'                        # your firstname
-      FLOW_LASTNAME: 'Doe'                          # your lastname
+      NEOS_USER_NAME: 'john'                        # neos username    
+      NEOS_USER_PASSWORD: 'john'                    # neos password
+      NEOS_USER_FIRSTNAME: 'John'                   # your firstname
+      NEOS_USER_LASTNAME: 'Doe'                     # your lastname
       NEOS_SITE_PACKAGE: 'Neos.Demo'                # the site package to use (will be imported automatically)
-      BASE_PACKAGE: 'neos/neos-base-distribution'   # the neos base package to use
-      BASE_VERSION: '4.0'                           # the neos base version to use
+#     NEOS_SITE_PACKAGE: 'My.New.Site'              # the site package to use (will be created andimported automatically)
+#     NEOS_SITE_NAME: 'New Neos Site!'
+      BUILD_VERSION: '4.0'                          # the neos base version to use
       MYSQL_USER: root                              # mysql username (has to match user defined for db container)
       MYSQL_PASSWORD: root                          # mysql password (has to match password defined for db container)
       MYSQL_DATABASE: database                      # mysql database (has to match database defined for db container)
