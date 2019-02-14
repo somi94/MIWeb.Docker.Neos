@@ -2,6 +2,7 @@
 
 web_path=$BUILD_PATH_RELEASE
 dev_path=$BUILD_PATH_DIST
+base_path=$BUILD_PATH_BASE
 
 link_file () {
     file=$1
@@ -9,6 +10,8 @@ link_file () {
     if [[ ! -f "$dev_path/$file" ]]; then
         if [[ -f "$web_path/$file" ]]; then
             cp $web_path/$file $dev_path/$file
+        elif [[ -f "$base_path/$file" ]]; then
+            cp $base_path/$file $dev_path/$file
         else
             touch $dev_path/$file
         fi
@@ -23,7 +26,9 @@ link_directory () {
 
     if [[ ! -d "$dev_path/$dir" ]]; then
         if [[ -d "$web_path/$dir" ]]; then
-            cp -r $web_path/$dir $dev_path/
+            cp -r $web_path/$dir $dev_path/$dir
+        elif [[ -d "$base_path/$dir" ]]; then
+            cp -r $base_path/$dir $dev_path/$dir
         else
             mkdir -p $dev_path/$dir
         fi
