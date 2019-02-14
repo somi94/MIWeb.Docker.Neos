@@ -35,6 +35,7 @@ services:
       # On top of that it will allow your IDE to locate the neos classes.
       - ./app-data/Neos:/var/www/html 
     environment:
+      SYSTEM_USER_NAME: 'user'                      # the development file owner
       FLOW_CONTEXT: 'Development'                   # the application context
       NEOS_USER_NAME: 'john'                        # neos username    
       NEOS_USER_PASSWORD: 'john'                    # neos password
