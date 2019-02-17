@@ -45,6 +45,10 @@ ADD container-commands /usr/share/neos-utils
 ADD container.sh /usr/local/bin/neos-utils
 RUN chmod a+x /usr/local/bin/neos-utils /usr/share/neos-utils/*
 
+#default page
+ADD default-page /usr/share/neos/default
+RUN rm -rf /var/www/html && ln -s /usr/share/neos/default /var/www/html
+
 #ADD app /usr/share/neos-project
 
 #ARG BUILD_REPOSITORY="https://github.com/neos/neos-base-distribution.git"

@@ -10,10 +10,10 @@ if [[ -z "$BUILD_PATH_RELEASE" ]]; then
     export BUILD_PATH_RELEASE=/var/www/html
 fi
 if [[ -z "$BUILD_PATH_DIST" ]]; then
-    export BUILD_PATH_DIST=/usr/share/neos-project
+    export BUILD_PATH_DIST=/usr/share/neos/project
 fi
 if [[ -z "$BUILD_PATH_BASE" ]]; then
-    export BUILD_PATH_BASE=/usr/share/neos-base
+    export BUILD_PATH_BASE=/usr/share/neos/build
 fi
 if [[ -z "$BUILD_PATH_UTILS" ]]; then
     export BUILD_PATH_UTILS=/usr/share/neos-utils

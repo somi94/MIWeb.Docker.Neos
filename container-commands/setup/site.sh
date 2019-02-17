@@ -26,12 +26,13 @@ if [[ $(./flow site:list) == *" $site "* ]]; then
 else
 	echo "Site '$site' not found. Creating it using name '$site_name'..."
 
-	./flow kickstart:site --site-name "$site_name" --package-key "$site"
-
-	mkdir -p $dev_path/Packages/Sites
-	mv $web_path/DistributionPackages/$site $dev_path/Packages/Sites/$site
-	neos-utils link
-	composer update
+	neos-utils kickstart "$site" "Site" "$site_name"
+#	./flow kickstart:site --site-name "$site_name" --package-key "$site"
+#
+#	mkdir -p $dev_path/Packages/Sites
+#	mv $web_path/DistributionPackages/$site $dev_path/Packages/Sites/$site
+#	neos-utils link
+#	composer update
 	
 	import=1
 fi
