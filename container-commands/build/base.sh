@@ -35,6 +35,7 @@ fi
 
 echo "Setting up build dir..."
 mkdir -p $BUILD_PATH_BASE
+find $BUILD_PATH_BASE -type l -delete
 rm -rf $BUILD_PATH_BASE/*
 cd $BUILD_PATH_BASE
 

@@ -25,3 +25,10 @@ if [ $? -ne 0 ]; then
     echo "Database migration failed. Aborting..."
     exit 1
 fi
+
+echo "Updating data ownership (user: '$SYSTEM_USER_NAME')..."
+chown -R "$SYSTEM_USER_NAME":www-data $BUILD_PATH_BASE/Data
+if [ $? -ne 0 ]; then
+    echo "Updating data ownership failed. Aborting..."
+    exit 1
+fi

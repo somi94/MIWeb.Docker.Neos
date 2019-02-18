@@ -2,13 +2,9 @@
 
 system_user=$SYSTEM_USER_NAME
 if [[ "$system_user" != "root" && $(grep -c "^$system_user:" /etc/passwd) -eq 0 ]]; then
-	echo ""
-    echo "#####################################"
-    echo "# Adding system user '$system_user'"
-    echo "#####################################"
-	echo ""
+    echo "Adding system user '$system_user'..."
 
-    adduser -q "$system_user"
+    adduser -q --disabled-password --no-create-home "$system_user"
 	if [ $? -ne 0 ]; then
 		echo "Adding system user '$system_user' failed. Aborting..."
 		exit 1

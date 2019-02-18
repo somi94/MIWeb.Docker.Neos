@@ -67,7 +67,7 @@ echo "# app initialized"
 echo "# starting webserver..."
 echo "################################"
 echo ""
-apache2-foreground
+runuser -l "$SYSTEM_USER_NAME" -c 'apache2-foreground'
 if [ $? -eq 0 ];then
    echo "Application stopped."
 else
