@@ -14,8 +14,10 @@ link_file () {
         fi
     fi
 
-    rm -f $base_path/$file
-    ln -sf $dev_path/$file $base_path/$file
+	if [[ -f "$dev_path/$file" ]]; then
+    	rm -f $base_path/$file
+    	ln -sf $dev_path/$file $base_path/$file
+	fi
 }
 
 link_directory () {
@@ -29,8 +31,10 @@ link_directory () {
         fi
     fi
 
-    rm -rf $base_path/$dir
-    ln -sf $dev_path/$dir $base_path/$dir
+    if [[ -d "$dev_path/$dir" ]]; then
+		rm -rf $base_path/$dir
+		ln -sf $dev_path/$dir $base_path/$dir
+    fi
 }
 
 mkdir -p $dev_path
@@ -39,7 +43,7 @@ find $base_path -type l -delete
 if [[ -d "$dev_path" ]]; then
     echo "Linking dev files from $dev_path..."
     link_file composer.json
-    link_file composer.lock
+    #link_file composer.lock
     link_directory Configuration
 
     if [[ -d "$dev_path/Packages" ]]; then

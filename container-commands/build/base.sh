@@ -34,9 +34,10 @@ else
 fi
 
 echo "Setting up build dir..."
-mkdir -p $BUILD_PATH_BASE
 find $BUILD_PATH_BASE -type l -delete
-rm -rf $BUILD_PATH_BASE/*
+rm -rf $BUILD_PATH_BASE/..?* $BUILD_PATH_BASE/.[!.]* $BUILD_PATH_BASE/*
+#rm -rf $BUILD_PATH_BASE
+mkdir -p $BUILD_PATH_BASE
 cd $BUILD_PATH_BASE
 
 echo "Performing git clone..."
