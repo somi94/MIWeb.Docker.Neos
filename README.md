@@ -29,11 +29,11 @@ services:
     volumes:
       # The app directory is where your neos development files will live. 
       # This includes project configuration, composer files and project specific packages (site package, site specific nodetypes...).
-      - ./app:/usr/share/neos-project
+      - ./app:/usr/share/neos/project
       # The app-data directory will link to the neos installation.
       # This isn't necessary and can be omitted (especially in production environments) but is useful to keep an eye on neos core files and thirdparty packages.
       # On top of that it will allow your IDE to locate the neos classes.
-      - ./app-data/Neos:/var/www/html 
+      - ./app-data/Neos:/usr/share/neos/base
     environment:
       SYSTEM_USER_NAME: 'johnnyd'                   # the development file owner
       FLOW_CONTEXT: 'Development'                   # the application context
