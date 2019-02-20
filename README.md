@@ -35,7 +35,7 @@ services:
       # On top of that it will allow your IDE to locate the neos classes.
       - ./app-data/Neos:/usr/share/neos/base
     environment:
-      SYSTEM_USER_NAME: 'johnnyd'                   # the development file owner
+#     SYSTEM_USER_NAME: 'johnnyd'                   # the development file owner
       FLOW_CONTEXT: 'Development'                   # the application context
       NEOS_USER_NAME: 'john'                        # neos username    
       NEOS_USER_PASSWORD: 'john'                    # neos password
