@@ -23,6 +23,9 @@ fi
 if [[ -z "$BUILD_PATH_BASE" ]]; then
     export BUILD_PATH_BASE="/usr/share/neos/build"
 fi
+if [[ -z "$BUILD_PATH_KEYS" ]]; then
+    export BUILD_PATH_KEYS="/usr/share/neos/keys"
+fi
 if [[ -z "$BUILD_PATH_UTILS" ]]; then
     export BUILD_PATH_UTILS="/usr/share/neos-utils"
 fi

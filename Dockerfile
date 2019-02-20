@@ -1,16 +1,11 @@
 FROM php:7.2-apache
 
-#ARG BASE_PACKAGE="neos/neos-base-distribution"
-#ARG BASE_VERSION="4.0.*"
-
-#ARG FLOW_USER="root"
-#ENV FLOW_USER "$FLOW_USER"
-
 # install dependencies
 RUN apt-get -y update && \
     apt-get install -y --no-install-recommends git zip zlib1g-dev unzip && \
 	apt-get install -y gettext-base && \
-	apt-get install -y sudo
+	apt-get install -y sudo && \
+	apt-get install -y openssh-client
 
 # apache
 ADD vhost.conf /etc/apache2/sites-available/000-default.conf
@@ -58,5 +53,7 @@ RUN rm -rf /var/www/html && ln -s /usr/share/neos/default /var/www/html
 #ARG BUILD_USER="root"
 
 #RUN neos-utils build-base
+
+VOLUME ["/usr/share/neos/keys"]
 
 CMD ["neos-utils","start"]
