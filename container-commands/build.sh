@@ -10,5 +10,6 @@ fi
 echo "Linking build..."
 rm -rf "$BUILD_PATH_RELEASE"
 ln -s "$BUILD_PATH_BASE" "$BUILD_PATH_RELEASE"
+# chown -R root:www-data "$BUILD_PATH_RELEASE/.."
 
 echo "Build finished."
