@@ -30,11 +30,23 @@ if [[ "$system_user" != "root" && $(grep -c "^$system_user:" /etc/passwd) -eq 0 
 		exit 1
 	fi
 
-    usermod -a -G $system_group "$system_user"
-	if [ $? -ne 0 ]; then
-		echo "Adding user '$system_user' to webserver group failed. Aborting..."
-		exit 1
-	fi
+#    usermod -a -G $system_group "$system_user"
+#	if [ $? -ne 0 ]; then
+#		echo "Adding user '$system_user' to group '$system_group' failed. Aborting..."
+#		exit 1
+#	fi
 else
 	echo "User '$system_user' already exists."
 fi
+
+if [[ " "$(awk -F':' '/'$system_group'/{print $4}' /etc/group | tr , " ")" " == *" $system_user "* ]]; then
+	echo "User '$system_user' already added to grop '$system_group'."
+else
+	echo "Adding user '$system_user' to group '$system_group'..."
+    usermod -a -G $system_group "$system_user"
+	if [ $? -ne 0 ]; then
+		echo "Adding user '$system_user' to group '$system_group' group failed. Aborting..."
+		exit 1
+	fi
+fi
+
