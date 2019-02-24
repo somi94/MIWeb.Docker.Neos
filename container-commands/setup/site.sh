@@ -44,6 +44,10 @@ if [[ "$import" = "1" ]]; then
 
 	./flow site:import --package-key "$site"
 
+	./flow resource:publish 
+
+	neos-utils setup filepermissions
+
 	echo "Site import finished."
 else
 	echo "Site existed and no reimport was forced, skipped site import."
