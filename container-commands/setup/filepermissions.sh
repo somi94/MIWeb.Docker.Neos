@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 container_user="root"
-if [[ -n "$1" ]]; then
-	container_user="$1"
+if [[ -n "$3" ]]; then
+	container_user="$3"
 elif [[ -n "$USER" ]]; then
 	container_user="$USER"
 fi
