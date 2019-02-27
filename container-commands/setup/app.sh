@@ -3,6 +3,7 @@
 cd $BUILD_PATH_BASE
 
 echo "Creating context settings..."
+mkdir -p "$BUILD_PATH_BASE/Configuration/$FLOW_CONTEXT"
 envsubst < "$BUILD_PATH_UTILS/Settings.yaml" > "$BUILD_PATH_BASE/Configuration/$FLOW_CONTEXT/Settings.Build.yaml"
 if [ $? -ne 0 ]; then
     echo "Couldn't write context settings file. aborting..."
