@@ -116,9 +116,8 @@ So in `Development` mode, your database credentials will be stored inside `app/C
 List of future features that have not been implemented yet.
 * Use nginx and more lightweight base image
 * Prune existing site and import a new one as soon as site package changed
+* Reimport site as soon as contents in package change
 * Update as soon as neos version changed
 * Utilities to build a production image (without development files)
 * Add documentation and autocomplete for neos utils
-* Add a temporary "Installing..." or "Maintenance..." page
-* Automatically re-link dev files if changed
 * Add default gitignore (to ignore context configuration)
