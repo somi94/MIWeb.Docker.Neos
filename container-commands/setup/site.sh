@@ -7,14 +7,13 @@ fi
 
 dev_path=$BUILD_PATH_DIST
 site="$NEOS_SITE_PACKAGE"
+site_name="$NEOS_SITE_NAME"
 force_reimport="$1"
 
 cd $BUILD_PATH_BASE
 
-if [[ -z "$NEOS_SITE_NAME" ]]; then
-	site_name="New Neos Site"
-else
-	site_name="$NEOS_SITE_NAME"
+if [[ -z "$force_reimport" ]]; then
+    force_reimport="$NEOS_SITE_REIMPORT"
 fi
 
 import=0
@@ -38,6 +37,10 @@ if [[ "$import" = "1" ]]; then
 
 	./flow site:prune '*'
 
+	./flow resource:clean
+
+	./flow flow:cache:flush --force
+
 	./flow site:import --package-key "$site"
 
 	./flow resource:publish 
@@ -48,5 +51,5 @@ if [[ "$import" = "1" ]]; then
 else
 	echo "Site existed and no reimport was forced, skipped site import."
 
-	./flow resource:publish
+	# ./flow resource:publish
 fi

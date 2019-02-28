@@ -49,3 +49,11 @@ fi
 if [[ -z "$NEOS_USER_LASTNAME" ]]; then
     export NEOS_USER_LASTNAME="Lastname"
 fi
+
+# site variables
+if [[ -z "$NEOS_SITE_NAME" ]]; then
+    export NEOS_SITE_NAME="New Neos Site"
+fi
+if [[ -z "$NEOS_SITE_REIMPORT" ]]; then
+    export NEOS_SITE_REIMPORT=0
+fi
