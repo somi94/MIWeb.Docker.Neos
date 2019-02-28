@@ -40,6 +40,12 @@ else
 	echo "No user defined, skipping user setup..."
 fi
 
+neos-utils setup protection
+if [ $? -ne 0 ]; then
+    echo "Webserver protection setup failed. Aborting..."
+    exit 1
+fi
+
 echo "Linking build..."
 rm -rf "$BUILD_PATH_RELEASE"
 ln -s "$BUILD_PATH_BASE" "$BUILD_PATH_RELEASE"
