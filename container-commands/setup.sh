@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 
-echo "Setting up system..."
-neos-utils setup system
-if [ $? -ne 0 ]; then
-    echo "System setup failed. Aborting..."
-    exit 1
-fi
-
-echo "Starting build..."
-neos-utils build
-if [ $? -ne 0 ]; then
-    echo "Build failed. Aborting..."
-    exit 1
+if [[ ! -f "$BUILD_PATH_BASE/.build" ]]; then
+    echo "Warning: no build found, starting build which might not desirable in production environment..."
+    neos-utils build
+    if [ $? -ne 0 ]; then
+        echo "Build failed. Aborting..."
+        exit 1
+    fi
+elif [[ ! -f "$BUILD_PATH_BASE/.dist" ]]; then
+    echo "Warning: no dist found, starting build update which might not desirable in production environment..."
+    neos-utils build update
+    if [ $? -ne 0 ]; then
+        echo "Build update failed. Aborting..."
+        exit 1
+    fi
 fi
 
 neos-utils setup app
@@ -37,5 +39,9 @@ if [[ -n "$NEOS_USER_NAME" ]]; then
 else
 	echo "No user defined, skipping user setup..."
 fi
+
+echo "Linking build..."
+rm -rf "$BUILD_PATH_RELEASE"
+ln -s "$BUILD_PATH_BASE" "$BUILD_PATH_RELEASE"
 
 echo "Setup finished."

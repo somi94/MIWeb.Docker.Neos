@@ -9,7 +9,7 @@ if [ $? -ne 0 ]; then
     echo "Couldn't write context settings file. aborting..."
     exit 1
 fi
-chmod "$SERVER_USER_NAME":www-data "$BUILD_PATH_BASE/Configuration/$FLOW_CONTEXT/Settings.Build.yaml"
+chown "$SERVER_USER_NAME":www-data "$BUILD_PATH_BASE/Configuration/$FLOW_CONTEXT/Settings.Build.yaml"
 
 if [[ ! -f "$BUILD_PATH_BASE/Configuration/Settings.yaml" ]]; then
     echo "No project settings file found. Creating default settings..."

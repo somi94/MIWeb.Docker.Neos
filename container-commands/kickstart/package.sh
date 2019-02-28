@@ -29,6 +29,8 @@ else
 	./flow kickstart:package "$package_key"
 fi
 
+# TODO: add composer require here and perform composer update
+
 #mkdir -p "$dev_path/$package_dir"
 #if [ $? -ne 0 ]; then
 #	echo "Creating package target path failed. Aborting..."

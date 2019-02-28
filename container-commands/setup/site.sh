@@ -5,12 +5,11 @@ if [[ -z "$NEOS_SITE_PACKAGE" ]]; then
 	exit 1
 fi
 
-web_path=$BUILD_PATH_RELEASE
 dev_path=$BUILD_PATH_DIST
 site="$NEOS_SITE_PACKAGE"
 force_reimport="$1"
 
-cd $web_path
+cd $BUILD_PATH_BASE
 
 if [[ -z "$NEOS_SITE_NAME" ]]; then
 	site_name="New Neos Site"
@@ -23,16 +22,13 @@ if [[ $(./flow site:list) == *" $site "* ]]; then
 	echo "Site '$site' exists."
 	
 	import=$force_reimport
+elif [[ -d "$BUILD_PATH_BASE/Packages/Sites/$site" || -d "$BUILD_PATH_DIST/Packages/$site" ]]; then
+    echo "Site '$site' exists, but hasn't been imported yet."
+    import=1
 else
 	echo "Site '$site' not found. Creating it using name '$site_name'..."
 
-	neos-utils kickstart "$site" "Site" "$site_name"
-#	./flow kickstart:site --site-name "$site_name" --package-key "$site"
-#
-#	mkdir -p $dev_path/Packages/Sites
-#	mv $web_path/DistributionPackages/$site $dev_path/Packages/Sites/$site
-#	neos-utils link
-#	composer update
+	neos-utils kickstart package "$site" "Site" "$site_name"
 	
 	import=1
 fi

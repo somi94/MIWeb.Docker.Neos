@@ -40,7 +40,7 @@ rm -rf $BUILD_PATH_BASE/..?* $BUILD_PATH_BASE/.[!.]* $BUILD_PATH_BASE/*
 mkdir -p $BUILD_PATH_BASE
 cd $BUILD_PATH_BASE
 
-echo "Performing git clone..."
+echo "Performing git clone (Repository: '$BUILD_REPOSITORY')..."
 git clone "$BUILD_REPOSITORY" $BUILD_PATH_BASE
 if [ $? -ne 0 ]; then
     echo "Git clone failed. Aborting..."
@@ -54,6 +54,8 @@ if [[ -n "$BUILD_VERSION" ]]; then
         echo "Version checkout failed. Aborting..."
         exit 1
     fi
+else
+    echo "No build version given, using master..."
 fi
 
 echo "Creating project directories..."

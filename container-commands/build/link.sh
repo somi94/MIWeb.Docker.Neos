@@ -41,11 +41,11 @@ link_directory () {
     fi
 }
 
-mkdir -p $dev_path
 find $base_path -type l -delete
 
 if [[ -d "$dev_path" ]]; then
     echo "Linking dev files from $dev_path..."
+
     link_file composer.json
     #link_file composer.lock
     link_directory Configuration
@@ -70,5 +70,5 @@ if [[ -d "$dev_path" ]]; then
 #        done
 #    fi
 else
-    echo "No dev files to link."
+    echo "No project files to link."
 fi

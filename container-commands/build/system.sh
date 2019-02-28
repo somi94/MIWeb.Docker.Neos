@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # setup users
-neos-utils setup system-user $SYSTEM_USER_NAME $SYSTEM_USER_ID
+neos-utils build system-user $SYSTEM_USER_NAME $SYSTEM_USER_ID
 if [ $? -ne 0 ]; then
 	echo "Adding system user '$SYSTEM_USER_NAME' (id: '$SYSTEM_USER_ID') failed. Aborting..."
     exit 1
 fi
 
-neos-utils setup system-user $SERVER_USER_NAME $SERVER_USER_ID
+neos-utils build system-user $SERVER_USER_NAME $SERVER_USER_ID
 if [ $? -ne 0 ]; then
     echo "Adding server user '$SERVER_USER_NAME' (id: '$SERVER_USER_ID') failed. Aborting..."
     exit 1

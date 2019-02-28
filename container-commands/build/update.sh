@@ -2,10 +2,15 @@
 
 cd $BUILD_PATH_BASE
 
-chown -R "$SYSTEM_USER_NAME":www-data "$BUILD_PATH_DIST"
-chmod -R g+rwx "$BUILD_PATH_DIST"
+checksum="[none]"
 
-checksum=$(find "$BUILD_PATH_DIST" -type f -name composer\.json -exec md5sum '{}' \; | md5sum | awk '{ print $1 }')
+if [[ -d "$BUILD_PATH_DIST" ]]; then
+    chown -R "$SYSTEM_USER_NAME":www-data "$BUILD_PATH_DIST"
+    chmod -R g+rwx "$BUILD_PATH_DIST"
+
+    checksum=$(find "$BUILD_PATH_DIST" -type f -name composer\.json -exec md5sum '{}' \; | md5sum | awk '{ print $1 }')
+fi
+
 #checksum=$(find "$BUILD_PATH_DIST" -type f -exec md5sum '{}' \; | md5sum | awk '{ print $1 }')
 checksum_file="$BUILD_PATH_BASE/.dist"
 

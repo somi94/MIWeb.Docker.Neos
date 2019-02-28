@@ -5,7 +5,7 @@ if [[ -z "$NEOS_USER_NAME" ]]; then
 	exit 1
 fi
 
-cd $BUILD_PATH_RELEASE
+cd $BUILD_PATH_BASE
 
 if [[ $(./flow user:list) == *" $NEOS_USER_NAME "* ]]; then
 	echo "User '$NEOS_USER_NAME' exists, updating password..."

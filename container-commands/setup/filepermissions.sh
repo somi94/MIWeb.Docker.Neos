@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd $BUILD_PATH_BASE
+
 container_user="root"
 if [[ -n "$3" ]]; then
 	container_user="$3"

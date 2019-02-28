@@ -40,7 +40,7 @@ else
 fi
 
 if [[ " "$(awk -F':' '/'$system_group'/{print $4}' /etc/group | tr , " ")" " == *" $system_user "* ]]; then
-	echo "User '$system_user' already added to grop '$system_group'."
+	echo "User '$system_user' already added to group '$system_group'."
 else
 	echo "Adding user '$system_user' to group '$system_group'..."
     usermod -a -G $system_group "$system_user"
