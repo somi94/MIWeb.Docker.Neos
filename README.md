@@ -218,7 +218,6 @@ services:
     volumes:
       # Those volume definitions are optional
       - ./app:/usr/share/neos/project
-      - ./app-data/Neos:/usr/share/neos/build
     environment:
       # The applications context. Defaults are 'Development' and 'Production'
       FLOW_CONTEXT: 'Production'
