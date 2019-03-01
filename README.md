@@ -105,8 +105,11 @@ docker exec my_neos_container rm -rf /usr/share/neos/project/Packages/*/My.Dev.P
 docker exec my_neos_container composer update
 ```
 This is a example for adding dev packages manually. The provided neos-utils contain some tools to do it automatically. Read more about it in the section "Setup development environment"
+
 **Important: if not already done, rememver to add the dev package to your composer.json, otherwise composer will never use it.**
+
 **Important: if you add a dev package that was installed via composer before, make shure to delete it from the container. Otherwise composer will never use your local dev package.** 
+
 #### app/Configuration
 Your projects configuration. In a fresh installation, this directory contains a default Settings.yaml, modify it to your needs.
 
@@ -240,6 +243,63 @@ services:
 Using this approach, you can build new versions of you application directly from your projects git repository (in this case: `https://github.com/myuser/My.Project`), without the need to clone it before.
 
 This is only a quick and dirty "deployment" solution. Of course, a cleaner solution would be to build your image beforehand and push it to a docker repository for deployments to production environments, or use a automatic build service along with your docker repository (like docker hub). But nobody is perfect :)
+
+### Setup development environment
+
+#### 1. The image
+Your first step should be to prepare your projects image. Have a look at "Creating a project image" to learn how to do that.
+
+#### 2. The devlopment environment
+Your second step should be to define your dev environment. You can do this via docker-compose. Have a look at "Creating a project image" to learn how to do that.
+
+#### 3. Add your first local dev package
+To add a new development package, follow those steps:
+
+1. Create the folder: app/Packages/My.New.Package
+2. Create a composer.json inside:
+```
+{
+  "name": "my/new-package",
+  "type": "neos-plugin",
+  "license": "GPL-3.0-or-later",
+  "description": "Neos is awesome!",
+  "require": {
+      "neos/neos": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "My\\New\\Package\\": "Classes/"
+    }
+  },
+  "extra": {
+    "neos": {
+      "package-key": "My.New.Package"
+    }
+  }
+}
+```
+3. Add it to projects composer.json (at: `app/composer.json`)
+```
+[...]
+  "require": {
+      [...]
+      "my/new-package": "dev-master"
+  }
+[...]
+```
+4. Run composer update
+```
+docker exec my_neos_container composer update
+```
+OR
+```
+docker exec -it my_neos_container bash
+composer update
+```
+5. Start development
+Your package should now be linked to your project, and you are ready to develop.
+Have a look at the official Neos documentation to learn about package development:
+https://neos.readthedocs.io/en/stable/ExtendingNeos/index.html
 
 ## ToDos
 List of future features that have not been implemented yet.
