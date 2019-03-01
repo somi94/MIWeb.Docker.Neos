@@ -140,8 +140,8 @@ RUN neos-utils build update
 Also you should add a .dockerignore to exclude docker volumes and other environment data from build context:
 ```
 /app-data
-/app/Packages/*
-!/app/Packages/My.New.Site
+/app/Packages/*/*
+!/app/Packages/My.New.Site/*
 ```
 
 Now you can use it for development environments using docker compose like this:
