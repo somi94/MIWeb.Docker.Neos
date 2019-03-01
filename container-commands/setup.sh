@@ -24,6 +24,10 @@ if [ $? -ne 0 ]; then
 fi
 
 neos-utils setup app
+if [ $? -ne 0 ]; then
+    echo "App setup failed. Aborting..."
+    exit 1
+fi
 
 if [[ -n "$NEOS_SITE_PACKAGE" ]]; then
 	echo "Setting up site..."

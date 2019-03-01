@@ -4,6 +4,8 @@ cd "$BUILD_PATH_BASE"
 
 # TODO: remove old dev packages?
 
+chown -R $SYSTEM_USER_NAME:www-data "$BUILD_PATH_DIST"
+
 if [[ -z "$DEV_PACKAGE_LIST" ]]; then
     echo "No dev packages defined, skipping dev setup..."
     exit 0
@@ -26,8 +28,10 @@ do
             echo "Removing installed package (if any)..."
             rm -rf "$BUILD_PATH_BASE/Packages/*/$dev_package/"
 
+            echo "Cloning '$dev_repo'..."
             git clone "$dev_repo" "$dev_path"
 
+            echo "Adding '$dev_package' to .gitignore..."
             echo "/$dev_path" >> "$BUILD_PATH_DIST/Packages/.gitignore"
 
             # chown -R
@@ -38,6 +42,8 @@ do
         echo "Dev package '$dev_entry' definition is invalid...";
     fi
 done
+
+chown -R $SYSTEM_USER_NAME:www-data "$BUILD_PATH_DIST"
 
 if [[ "$update" = "1" ]]; then
     echo "Dev package(s) changed, refreshing environment..."
