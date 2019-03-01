@@ -255,8 +255,8 @@ Your second step should be to define your dev environment. You can do this via d
 #### 3. Add your first local dev package
 To add a new development package, follow those steps:
 
-1. Create the folder: app/Packages/My.New.Package
-2. Create a composer.json inside:
+##### 1. Create the folder: app/Packages/My.New.Package
+##### 2. Create a composer.json inside
 ```
 {
   "name": "my/new-package",
@@ -278,7 +278,7 @@ To add a new development package, follow those steps:
   }
 }
 ```
-3. Add it to projects composer.json (at: `app/composer.json`)
+##### 3. Add it to projects composer.json (at: `app/composer.json`)
 ```
 [...]
   "require": {
@@ -287,7 +287,7 @@ To add a new development package, follow those steps:
   }
 [...]
 ```
-4. Run composer update
+##### 4. Run composer update
 ```
 docker exec my_neos_container composer update
 ```
@@ -296,7 +296,7 @@ OR
 docker exec -it my_neos_container bash
 composer update
 ```
-5. Start development
+##### 5. Start development
 Your package should now be linked to your project, and you are ready to develop.
 Have a look at the official Neos documentation to learn about package development:
 https://neos.readthedocs.io/en/stable/ExtendingNeos/index.html
