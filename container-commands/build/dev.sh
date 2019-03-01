@@ -28,6 +28,8 @@ do
 
             git clone "$dev_repo" "$dev_path"
 
+            echo "/$dev_path" >> "$BUILD_PATH_DIST/Packages/.gitignore"
+
             # chown -R
 
             update=1
