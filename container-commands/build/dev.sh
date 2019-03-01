@@ -16,8 +16,7 @@ fi
 
 update=0
 
-for dev_entry in "$DEV_PACKAGE_LIST"
-do
+while read dev_entry; do
     if [[ "$dev_entry" =~ ^([^:]*):(.*)$ ]]; then
         dev_package=${BASH_REMATCH[1]}
         dev_repo=${BASH_REMATCH[2]}
@@ -44,7 +43,7 @@ do
     else
         echo "Dev package '$dev_entry' definition is invalid...";
     fi
-done
+done <<< "$DEV_PACKAGE_LIST"
 
 chown -R $DEV_USER_NAME:www-data "$BUILD_PATH_DIST"
 
