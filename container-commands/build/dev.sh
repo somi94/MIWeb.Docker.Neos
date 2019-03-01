@@ -4,7 +4,10 @@ cd "$BUILD_PATH_BASE"
 
 # TODO: remove old dev packages?
 
-chown -R $SYSTEM_USER_NAME:www-data "$BUILD_PATH_DIST"
+echo "Setting up system user ($DEV_USER_NAME)"
+neos-utils build system-user $DEV_USER_NAME $DEV_USER_ID
+
+chown -R $DEV_USER_NAME:www-data "$BUILD_PATH_DIST"
 
 if [[ -z "$DEV_PACKAGE_LIST" ]]; then
     echo "No dev packages defined, skipping dev setup..."
@@ -43,7 +46,7 @@ do
     fi
 done
 
-chown -R $SYSTEM_USER_NAME:www-data "$BUILD_PATH_DIST"
+chown -R $DEV_USER_NAME:www-data "$BUILD_PATH_DIST"
 
 if [[ "$update" = "1" ]]; then
     echo "Dev package(s) changed, refreshing environment..."

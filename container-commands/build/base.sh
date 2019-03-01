@@ -70,4 +70,6 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "$build_info" > "$build_info_file"
+echo "build info ($build_info_file):"
+cat "$build_info_file"
 

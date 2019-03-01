@@ -4,6 +4,15 @@
 if [[ -z "$SYSTEM_USER_NAME" ]]; then
     export SYSTEM_USER_NAME="root"
 fi
+if [[ -z "$SYSTEM_USER_ID" ]]; then
+    export SYSTEM_USER_ID=""
+fi
+if [[ -z "$DEV_USER_NAME" ]]; then
+    export DEV_USER_NAME="$SYSTEM_USER_NAME"
+fi
+if [[ -z "$DEV_USER_ID" ]]; then
+    export DEV_USER_ID="$SYSTEM_USER_ID"
+fi
 
 # server variables
 if [[ -z "$SERVER_USER_NAME" ]]; then
