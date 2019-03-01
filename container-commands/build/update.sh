@@ -34,13 +34,6 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Updating dev packages..."
-neos-utils build dev
-if [ $? -ne 0 ]; then
-    echo "Dev package update failed. Aborting..."
-    exit 1
-fi
-
 echo "Performing composer update..."
 composer update
 if [ $? -ne 0 ]; then

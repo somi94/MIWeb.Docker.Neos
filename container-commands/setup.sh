@@ -16,6 +16,13 @@ elif [[ ! -f "$BUILD_PATH_BASE/.dist" ]]; then
     fi
 fi
 
+echo "Updating dev packages..."
+neos-utils build dev
+if [ $? -ne 0 ]; then
+    echo "Dev package update failed. Aborting..."
+    exit 1
+fi
+
 neos-utils setup app
 
 if [[ -n "$NEOS_SITE_PACKAGE" ]]; then
