@@ -156,6 +156,8 @@ services:
       - ./app:/usr/share/neos/project
       - ./app-data/Neos:/usr/share/neos/build
     environment:
+      SYSTEM_USER_NAME: 'johnnyd'                   # the development file owner
+      SYSTEM_USER_ID: 1002                          # the id of the development file owner (should match user id on host system)
       # Example for automatically adding development packages
       DEV_PACKAGE_LIST: >-
         MIWeb.Neos.NodeTypes:https://github.com/somi94/MIWeb.Neos.NodeTypes
