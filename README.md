@@ -137,6 +137,11 @@ RUN chown -R root:www-data /usr/share/neos/project
 RUN neos-utils build update
 ```
 
+Also you should add a .dockerignore to exclude docker volumes and other environment data from build context:
+```
+/app-data
+```
+
 Now you can use it for development environments using docker compose like this:
 ```
 version: '3.3'
