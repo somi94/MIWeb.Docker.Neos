@@ -3,13 +3,14 @@
 cd $BUILD_PATH_BASE
 
 echo "Creating context settings..."
+context_settings_file="$BUILD_PATH_BASE/Configuration/$FLOW_CONTEXT/Settings.Build.yaml"
 mkdir -p "$BUILD_PATH_BASE/Configuration/$FLOW_CONTEXT"
-envsubst < "$BUILD_PATH_UTILS/Settings.yaml" > "$BUILD_PATH_BASE/Configuration/$FLOW_CONTEXT/Settings.Build.yaml"
+envsubst < "$BUILD_PATH_UTILS/Settings.yaml" >> "$context_settings_file"
 if [ $? -ne 0 ]; then
     echo "Couldn't write context settings file. aborting..."
     exit 1
 fi
-chown "$SERVER_USER_NAME":www-data "$BUILD_PATH_BASE/Configuration/$FLOW_CONTEXT/Settings.Build.yaml"
+chown "$SERVER_USER_NAME":www-data "$context_settings_file"
 
 if [[ ! -f "$BUILD_PATH_BASE/Configuration/Settings.yaml" ]]; then
     echo "No project settings file found. Creating default settings..."
