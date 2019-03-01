@@ -6,7 +6,7 @@ Docker image for Neos CMS sites and applications
 [Docker](https://www.docker.com/)
 
 [Docker Compose](https://docs.docker.com/compose/)
-### Setup
+### Setupdocker
 #### 1. Create a project directory
 Create a empty directory at a location of your choice. This is the place where your project files will reside.
 
@@ -140,6 +140,8 @@ RUN neos-utils build update
 Also you should add a .dockerignore to exclude docker volumes and other environment data from build context:
 ```
 /app-data
+/app/Packages/*
+!/app/Packages/My.New.Site
 ```
 
 Now you can use it for development environments using docker compose like this:
