@@ -22,6 +22,19 @@ if [[ -z "$SERVER_USER_GROUP" ]]; then
     export SERVER_USER_GROUP="www-data"
 fi
 
+# mysql variables
+if [[ -z "$MYSQL_HOST" ]]; then
+    export MYSQL_HOST="db"
+fi
+
+# smtp variables
+if [[ -z "$SMTP_PORT" ]]; then
+    export SMTP_PORT="465"
+fi
+if [[ -z "$SMTP_ENCRYPTION" ]]; then
+    export SMTP_ENCRYPTION="ssl"
+fi
+
 # build variables
 if [[ -z "$BUILD_PATH_RELEASE" ]]; then
     export BUILD_PATH_RELEASE="/var/www/html"

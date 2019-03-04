@@ -1,0 +1,11 @@
+Neos:
+  SwiftMailer:
+    transport:
+      type: 'Swift_SmtpTransport'
+      options:
+        host: '${SMTP_HOST}'
+        port: '${SMTP_PORT}'
+        encryption: '${SMTP_ENCRYPTION}'
+        username: '${SMTP_USER_NAME}'
+        password: '${SMTP_USER_PASSWORD}'
+        localDomain: '${SMTP_DOMAIN}'

@@ -6,8 +6,8 @@ Neos:
       backendOptions:
         driver: pdo_mysql
         charset: 'utf8mb4'
-        host: db    		
-        dbname: ${MYSQL_DATABASE}
-        user: ${MYSQL_USER}
-        password: ${MYSQL_PASSWORD}
+        host: '${MYSQL_HOST}'
+        dbname: '${MYSQL_DATABASE}'
+        user: '${MYSQL_USER}'
+        password: '${MYSQL_PASSWORD}'
 

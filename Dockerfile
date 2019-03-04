@@ -34,6 +34,7 @@ RUN chmod a+x /usr/local/bin/composer
 #RUN mkdir -p Data/Persistent
 #RUN ./flow core:setfilepermissions $FLOW_USER www-data www-data
 ADD Settings.yaml /usr/share/neos-utils/Settings.yaml
+ADD Settings.SMTP.yaml /usr/share/neos-utils/Settings.SMTP.yaml
 
 #start script
 ADD container-commands /usr/share/neos-utils
