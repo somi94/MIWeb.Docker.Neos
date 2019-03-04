@@ -45,6 +45,9 @@ fi
 if [[ -z "$BUILD_PATH_BASE" ]]; then
     export BUILD_PATH_BASE="/usr/share/neos/build"
 fi
+if [[ -z "$BUILD_PATH_DATA" ]]; then
+    export BUILD_PATH_DATA="/usr/share/neos/data"
+fi
 if [[ -z "$BUILD_PATH_KEYS" ]]; then
     export BUILD_PATH_KEYS="/usr/share/neos/keys"
 fi

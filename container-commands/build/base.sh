@@ -58,9 +58,26 @@ else
     echo "No build version given, using master..."
 fi
 
-echo "Creating project directories..."
+echo "Creating data directories..."
 mkdir -p Data/Temporary
 mkdir -p Data/Persistent
+
+echo "Moving data directories..."
+mv Data/* "$BUILD_PATH_DATA"
+if [[ $? -ne 0 ]]; then
+    echo "Moving data directory failed. Aborting..."
+    exit 1
+fi
+
+rm -rf Data
+
+echo "Linking data directory..."
+ln -sf "$BUILD_PATH_DATA" Data
+if [[ $? -ne 0 ]]; then
+    echo "Linking data directory failed. Aborting..."
+    exit 1
+fi
+chown -R root:www-data Data
 
 echo "Updating build..."
 neos-utils build update --force

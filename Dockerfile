@@ -56,6 +56,7 @@ RUN rm -rf /var/www/html && ln -s /usr/share/neos/default /var/www/html
 #RUN neos-utils build-base
 
 VOLUME ["/usr/share/neos/keys"]
+VOLUME ["/usr/share/neos/data"]
 
 ARG BUILD_REPOSITORY="https://github.com/neos/neos-base-distribution.git"
 ARG BUILD_VERSION="4.2"
