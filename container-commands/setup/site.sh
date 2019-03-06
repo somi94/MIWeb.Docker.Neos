@@ -51,5 +51,5 @@ if [[ "$import" = "1" ]]; then
 else
 	echo "Site existed and no reimport was forced, skipped site import."
 
-	# ./flow resource:publish
+	./flow resource:publish
 fi

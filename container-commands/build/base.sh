@@ -62,22 +62,23 @@ echo "Creating data directories..."
 mkdir -p Data/Temporary
 mkdir -p Data/Persistent
 
-echo "Moving data directories..."
-mv Data/* "$BUILD_PATH_DATA"
-if [[ $? -ne 0 ]]; then
-    echo "Moving data directory failed. Aborting..."
-    exit 1
-fi
-
-rm -rf Data
-
-echo "Linking data directory..."
-ln -sf "$BUILD_PATH_DATA" Data
-if [[ $? -ne 0 ]]; then
-    echo "Linking data directory failed. Aborting..."
-    exit 1
-fi
-chown -R root:www-data Data
+#echo "Moving data directories..."
+#rm -rf "$BUILD_PATH_DATA/*"
+#mv Data/* "$BUILD_PATH_DATA"
+#if [[ $? -ne 0 ]]; then
+#    echo "Moving data directories failed. Aborting..."
+#    exit 1
+#fi
+#
+#rm -rf Data
+#
+#echo "Linking data directory..."
+#ln -sf "$BUILD_PATH_DATA" Data
+#if [[ $? -ne 0 ]]; then
+#    echo "Linking data directory failed. Aborting..."
+#    exit 1
+#fi
+#chown -R root:www-data Data
 
 echo "Updating build..."
 neos-utils build update --force

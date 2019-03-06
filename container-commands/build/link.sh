@@ -49,6 +49,7 @@ if [[ -d "$dev_path" ]]; then
     link_file composer.json
     #link_file composer.lock
     link_directory Configuration
+    link_directory Data ../data
 
     link_directory DistributionPackages Packages
 #    if [[ -d "$dev_path/Packages" ]]; then

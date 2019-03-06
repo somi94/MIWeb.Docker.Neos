@@ -60,6 +60,7 @@ VOLUME ["/usr/share/neos/data"]
 
 ARG BUILD_REPOSITORY="https://github.com/neos/neos-base-distribution.git"
 ARG BUILD_VERSION="4.2"
+ARG GITHUB_TOKEN=""
 
 RUN neos-utils build
 

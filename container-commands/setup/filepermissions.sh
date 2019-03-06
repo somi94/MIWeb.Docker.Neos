@@ -13,4 +13,4 @@ echo "Applying file permissions (user: '$container_user')..."
 #chown -R $SYSTEM_USER_NAME:www-data $BUILD_PATH_RELEASE
 #chown -R $SYSTEM_USER_NAME:www-data $BUILD_PATH_DIST
 #./flow core:setfilepermissions $SYSTEM_USER_NAME www-data www-data
-./flow core:setfilepermissions $container_user www-data www-data
+./flow core:setfilepermissions "$container_user" www-data www-data
