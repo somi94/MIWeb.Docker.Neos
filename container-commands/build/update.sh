@@ -2,6 +2,13 @@
 
 cd $BUILD_PATH_BASE
 
+if [[ -n "$GITHUB_TOKEN" ]]; then
+    echo "Configuring github token..."
+    composer config --global github-oauth.github.com "$GITHUB_TOKEN"
+else
+    echo "No github token given, skipping token configuration..."
+fi
+
 checksum="[none]"
 
 if [[ -d "$BUILD_PATH_DIST" ]]; then

@@ -24,10 +24,3 @@ if [[ -d "$BUILD_PATH_DIST" ]]; then
     echo "Applying project file permissions (user: '$SYSTEM_USER_NAME', group: '$SERVER_USER_GROUP')..."
     chown -R $SYSTEM_USER_NAME:$SERVER_USER_GROUP $BUILD_PATH_DIST
 fi
-
-if [[ -n "$GITHUB_TOKEN" ]]; then
-    echo "Configuring github token..."
-    composer config --global github-oauth.github.com "$GITHUB_TOKEN"
-else
-    echo "No github token given, skipping token configuration..."
-fi
