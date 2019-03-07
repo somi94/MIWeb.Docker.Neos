@@ -42,7 +42,7 @@ ADD container.sh /usr/local/bin/neos-utils
 RUN chmod a+x /usr/local/bin/neos-utils /usr/share/neos-utils/*
 
 #default page
-ADD default-page /usr/share/neos/default
+ADD default-page /usr/share/neos/default/Web
 RUN rm -rf /var/www/html && ln -s /usr/share/neos/default /var/www/html
 
 #ADD app /usr/share/neos-project
