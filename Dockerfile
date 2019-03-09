@@ -58,8 +58,8 @@ RUN rm -rf /var/www/html && ln -s /usr/share/neos/default /var/www/html
 VOLUME ["/usr/share/neos/keys"]
 VOLUME ["/usr/share/neos/data"]
 
-ARG BUILD_REPOSITORY="https://github.com/neos/neos-base-distribution.git"
-ARG BUILD_VERSION="4.2"
+ARG BUILD_REPOSITORY="https://github.com/neos/flow-base-distribution.git"
+ARG BUILD_VERSION="5.2"
 ARG GITHUB_TOKEN=""
 
 RUN neos-utils build
