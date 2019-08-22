@@ -63,5 +63,7 @@ ln -s "$BUILD_PATH_BASE" "$BUILD_PATH_RELEASE"
 
 echo "Setup finished."
 
-echo "Starting runner..."
-neos-utils runner &
+if [[ -n "$RUNNER_COMMAND" ]]; then
+    echo "Starting runner..."
+    neos-utils runner &
+fi
