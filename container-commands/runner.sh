@@ -5,4 +5,4 @@ while true; do
     
     echo "Sleeping for 30s..."
     sleep 30
-end
+done
