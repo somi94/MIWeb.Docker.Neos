@@ -18,10 +18,34 @@ fi
 
 echo "Updating dev packages..."
 neos-utils build dev
-if [ $? -ne 0 ]; then
+if [[ $? -ne 0 ]]; then
     echo "Dev package update failed. Aborting..."
     exit 1
 fi
+
+ready_check_counter="0"
+ready_check_max_attempts="10"
+ready_check_sleep="3"
+while [[ "$ready_check_counter" -lt "$ready_check_max_attempts" ]]; do
+    ready_check_attempt="$ready_check_counter"+1
+    echo "Waiting for environment to become ready ($ready_check_attempt / $ready_check_max_attempts) ..."
+    ready_check_result=$(php /ready.php)
+    if [[ "$ready_check_result" -eq "ready" ]]; then
+        echo "Environment is ready. Continuing ..."
+        break
+    elif [[ "$ready_check_attempt" -eq "$ready_check_max_attempts" ]]; then
+        echo "Environment is not ready. Ready check result:"
+        echo "$ready_check_result"
+        echo "Ready check failed $ready_check_max_attempts times. Aborting ..."
+        exit 1
+    else
+        echo "Environment is not ready. Ready check result:"
+        echo "$ready_check_result"
+        echo "Sleeping for ${ready_check_sleep}s ..."
+        sleep "$ready_check_sleep"
+        ready_check_counter="$ready_check_counter"+1
+    fi
+done
 
 neos-utils setup app
 if [ $? -ne 0 ]; then

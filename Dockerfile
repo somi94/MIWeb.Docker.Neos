@@ -27,6 +27,9 @@ RUN curl -s https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN chmod a+x /usr/local/bin/composer
 
+# ready check
+ADD ready.php /ready.php
+RUN chmod a+x /ready.php
 
 #neos
 #RUN composer create-project $BASE_PACKAGE:$BASE_VERSION /var/www/html
